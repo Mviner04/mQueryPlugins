@@ -1,11 +1,11 @@
 /*
- * Infinite Carousel - put a collection of LI's, all assumed to be same width into an infinite scrolling 
+ * Mitchousel the Infinite Carousel - put a collection of LI's, all assumed to be same width into an infinite scrolling 
  * carousel. Great for a product slider.
  *
  * @depends jQuery 1.7+
  *
  * @Usage:
- *	$('ul').bacardiSlider({
+ *	$('ul').mitchousel({
  *		numToShow: int (default 4) - how many to show per group
  *		prev: string (default 'previousButton') - class name to bind the previous button to (or will create)
  *		next: string (default 'nextButton') - class to bind next button (or will create)
