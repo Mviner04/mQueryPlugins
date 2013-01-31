@@ -19,7 +19,7 @@
 	
 	var $win = $(window);
 
-	var BacardiSlider = function(elem, opts) {
+	var Mitchousel = function(elem, opts) {
 		this.elem = $(elem);
 		
 		this.defaults = { // options settable via opts obj
@@ -57,7 +57,7 @@
 		}
 	};
 
-	BacardiSlider.prototype = {
+	Mitchousel.prototype = {
 
 		init: function() {
 			this.slideWidth = this.slides.first().outerWidth(true); // for now, assume all same width
@@ -221,14 +221,14 @@
 
 	};
 
-	$.fn.bacardiSlider = function(options) {
+	$.fn.mitchousel = function(options) {
 		return this.each(function() {
-			new BacardiSlider(this, options);
+			new Mitchousel(this, options);
 		});
 	};
 
 	$(function() {
-		$('.productList').bacardiSlider();
+		$('.productList').mitchousel();
 	});
 
 })(jQuery, window);
