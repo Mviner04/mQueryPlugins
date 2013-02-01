@@ -227,8 +227,4 @@
 		});
 	};
 
-	$(function() {
-		$('.productList').mitchousel();
-	});
-
 })(jQuery, window);
