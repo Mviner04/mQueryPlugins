@@ -17,32 +17,53 @@
 
 */
 
-$.fn.customCbx = function(options) {
+$.fn.customCbx = function (options) {
 
-	var settings = $.extend( {
-		className : 'custom-checkbox',
-		element : 'div'
-	}, options);
+    var settings = $.extend({
+        className: 'custom-checkbox',
+        element: 'a'
+    }, options);
 
-	return this.each(function() {
-		var $this = $(this);
-		$this.css({position: 'absolute', left: '-999px'});
-		var cCbx = $('<'+settings.element+' class="'+settings.className+'"></'+settings.element+'>');
-		cCbx.data('checkboxName', $this.attr('name'));
-		cCbx.prop('id', cCbx.data('checkboxName'));
-		if($this.is(':checked')) {
-			cCbx.addClass('checked');
-		}
-		$this.after(cCbx);
-		cCbx.on('click', function(e) {
-			var bx = $('input[name='+$(this).data('checkboxName')+']');
-			if(bx.is(':checked')) {
-				$(this).removeClass('checked');
-			} else {
-				$(this).addClass('checked');
-			}
-			bx.trigger('click');
-
-		});
-	});
+    return this.each(function () {
+        var $this = $(this);
+        $this.css({ position: 'absolute', left: '-9999em' });
+        var cCbx = $('<' + settings.element + ' class="' + settings.className + '"></' + settings.element + '>');
+        cCbx.data('checkboxName', $this.attr('name'));
+        cCbx.data('ele', $this);
+        cCbx.prop('id', cCbx.data('checkboxName'));
+        if ($this.is(':checked')) {
+            cCbx.addClass('checked');
+        }
+        $this.after(cCbx);
+        cCbx.on("touchend click", function (e) {
+            if ($(this).data("moved")) {
+                $(this).removeData("moved")
+            } else {
+                e.preventDefault();
+                e.stopPropagation();
+                var bx = $(this).data('ele');
+                if (bx.is(':checked')) {
+                    $(this).removeClass('checked');
+                } else {
+                    $(this).addClass('checked');
+                }
+                bx.trigger('click');
+            }
+        })
+        .on("touchmove", function(e) {
+            $(this).data("moved", true);
+        });
+        cCbx.siblings('label').eq(0).on("touchstart click", function (e) {
+            if ($(this).data("moved")) {
+                $(this).removeData("moved");
+            } else {
+                e.preventDefault();
+                e.stopPropagation();
+                cCbx.trigger('click');
+            }
+        })
+        .on("touchmove", function (e) {
+            $(this).data("moved", true);
+        });;
+    });
 };
